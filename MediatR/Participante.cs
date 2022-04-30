@@ -6,20 +6,19 @@ namespace MediatR
 {
     public abstract class Participante
     {
-        private string _nome;
-        private ChatSala _chatSala;
+        private readonly string _nome;
 
-        public Participante(string Nome)
+        protected Participante(string Nome)
         {
             _nome = Nome;
         }
 
         public string Nome { get { return _nome; } }
-        public ChatSala ChatSala { get { return _chatSala; } set { _chatSala = value; } }
+        public ChatSala ChatSala { get; set; }
 
         public virtual void Enviar(string para, string msg)
         {
-            _chatSala.Enviar(_nome, para, msg);
+            ChatSala.Enviar(_nome, para, msg);
         }
 
         public virtual void ReceberMensagem(string de, string msg)
